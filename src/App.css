@@ -9,6 +9,7 @@ body{
   --type-firts: Helvetica, Arial, sans-serif;
   --type-second: "Spectral", Georgia;
   font-family: var(--type-firts);
+  padding-top: 4rem;
 }
 
 h1,h2,h3,h4,p{
@@ -31,6 +32,10 @@ button, input{
   font-size: 1rem;
   font-family: var(--type-firts);
   color: #333;
+}
+
+a{
+  text-decoration: none;
 }
 
 .container{
