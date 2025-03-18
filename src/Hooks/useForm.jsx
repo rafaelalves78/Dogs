@@ -3,7 +3,11 @@ import React, { useState } from 'react';
 const types = {
   email: {
     regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-    message: 'Preencha um email válido',
+    message: 'Preencha um email válido.',
+  },
+  number: {
+    regex: /^\d+$/,
+    message: 'Utilize números apenas.',
   },
 };
 
