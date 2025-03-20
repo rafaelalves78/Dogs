@@ -1,22 +1,21 @@
-import React, { createContext, useCallback, useEffect, useState } from 'react';
-
+import React from 'react';
 import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_GET } from './Api';
 import { useNavigate } from 'react-router-dom';
 
-export const UserContext = createContext();
+export const UserContext = React.createContext();
 
 export const UserStorage = ({ children }) => {
-  const [data, setData] = useState(null);
-  const [login, setLogin] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [data, setData] = React.useState(null);
+  const [login, setLogin] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(null);
   const navigate = useNavigate();
 
-  const userLogout = useCallback(async function () {
+  const userLogout = React.useCallback(async function () {
     setData(null);
     setError(null);
     setLoading(false);
-    setLoading(false);
+    setLogin(false);
     window.localStorage.removeItem('token');
   }, []);
 
@@ -25,7 +24,7 @@ export const UserStorage = ({ children }) => {
     const response = await fetch(url, options);
     const json = await response.json();
     setData(json);
-    setLoading(true);
+    setLogin(true);
   }
 
   async function userLogin(username, password) {
@@ -47,7 +46,7 @@ export const UserStorage = ({ children }) => {
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     async function autoLogin() {
       const token = window.localStorage.getItem('token');
       if (token) {
@@ -64,18 +63,17 @@ export const UserStorage = ({ children }) => {
           setLoading(false);
         }
       } else {
-        setLoading(false);
+        setLogin(false);
       }
     }
     autoLogin();
   }, [userLogout]);
+
   return (
-    <div>
-      <UserContext.Provider
-        value={{ userLogin, userLogout, data, error, loading, login }}
-      >
-        {children}
-      </UserContext.Provider>
-    </div>
+    <UserContext.Provider
+      value={{ userLogin, userLogout, data, error, loading, login }}
+    >
+      {children}
+    </UserContext.Provider>
   );
 };

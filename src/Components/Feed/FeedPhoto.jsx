@@ -7,7 +7,7 @@ import Error from '../Helper/Error';
 import Loading from '../Helper/Loading';
 import styles from './FeedPhoto.module.css';
 
-const FeedPhoto = () => {
+const FeedPhoto = ({ setModalPhoto }) => {
   const { data, loading, error, request } = useFetch();
 
   useEffect(() => {
@@ -24,7 +24,11 @@ const FeedPhoto = () => {
     return (
       <ul className={`${styles.feed} animeLeft`}>
         {data.map((photo) => (
-          <FeedPhotoItem key={photo.id} photo={photo} />
+          <FeedPhotoItem
+            setModalPhoto={setModalPhoto}
+            key={photo.id}
+            photo={photo}
+          />
         ))}
       </ul>
     );
